@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+>
+<head>
+    <meta charset="UTF-8">
+    <title>Изменить данные о читателе</title>
+</head>
+<body>
+<h3><a th:href="@{/e-library}">Домой</a></h3>
+<hr/>
+<form th:method="PATCH" th:action="@{/e-library/persons/{id}(id=${person.getId()})}" th:object="${person}">
+    <label for="name">Изменить имя:</label>
+    <input type="text" th:field="*{name}" id="name"/>
+    <span style="color:red" class="validationError" th:if="${#fields.hasErrors('name')}"
+          th:errors="*{name}">name Error</span>
+    <br/>
+
+    <label for="surname">Изменить Фамилию:</label>
+    <input type="text" th:field="*{surname}" id="surname"/>
+    <span style="color:red" class="validationError" th:if="${#fields.hasErrors('surname')}"
+          th:errors="*{surname}">surname Error</span>
+    <br/>
+    <label for="middleName">Изменить или добавить Отчество:</label>
+    <input type="text" th:field="*{middleName}" id="middleName"/>
+    <span style="color:red" class="validationError" th:if="${#fields.hasErrors('middleName')}"
+          th:errors="*{middleName}">middleName Error</span>
+    <br/>
+
+    <label for="birthday">Сменить дату рождения:</label>
+    <input type="date" th:field="*{birthday}" id="birthday"/>
+    <span style="color:red" class="validationError" th:if="${#fields.hasErrors('birthday')}"
+          th:errors="*{birthday}">birthday Error</span>
+    <br/>
+
+    <input type="submit" value="Обновить человека"/>
+</form>
+</body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Человек</title>
+    <link rel="stylesheet" th:href="@{/e-library/styles.css}"/>
+</head>
+<body>
+<h3><a th:href="@{/e-library}">Домой</a></h3>
+<hr/>
+<div class="info">
+    <p th:inline="text">[[${person.getSurname()}]] [[${person.getName()}]] [[${person.getMiddleName()}]],
+        [[${person.getBirthday()}]]</p>
+    <a th:href="@{{id}/edit(id=${person.getId()})}">Изменить человека</a>
+    <form th:method="DELETE" th:action="@{{id}/(id=${person.getId()})}">
+        <input type="submit" value="Удалить человека">
+    </form>
+</div>
+<div th:if="${#lists.isEmpty(books)}">
+    <p>Человек не взял ни одной книги</p>
+    <a th:href="@{/e-library/books}">Выбрать книгу для назначения</a>
+</div>
+<div th:if="${not #lists.isEmpty(books)}">
+    <h3>Книги</h3>
+    <div th:each="book :${books}">
+        <p>[[${book.getName()}]] - [[${book.getAuthor()}]], [[${book.getYearPublishing()}]]</p>
+    </div>
+
+</div>
+</body>
+</html>

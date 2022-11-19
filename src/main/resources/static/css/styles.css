@@ -1,0 +1,6 @@
+.info {
+    display: grid;
+    grid-template-columns: repeat(3, max-content);
+    grid-column-gap: 4%;
+    align-items: center;
+}

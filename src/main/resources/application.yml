@@ -1,0 +1,4 @@
+server:
+  port: 8077
+  #servlet:
+  #  contextPath: /e-library #contextPath настроен в классе MySpringMvcDispatcherSerlvetIntitializer#getServletMappings

@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="2a18a6d4-0a5b-4846-9792-b00748584d8b" name="Changes" comment="Электронная библиотека | MVP&#10;&#10;Можно добавлять/редактировать/удалять кинги и читателей.">
+      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ru/venidiktov/config/MySpringMvcDispatcherSerlvetIntitializer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ru/venidiktov/config/SpringConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ru/venidiktov/controller/BookController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ru/venidiktov/controller/PersonController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ru/venidiktov/dao/BookDao.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ru/venidiktov/dao/PersonDao.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ru/venidiktov/model/Book.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ru/venidiktov/model/Person.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ru/venidiktov/service/BookService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ru/venidiktov/service/PersonService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/application.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/database.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/database.properties.origin" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/schema.sql" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/settings.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/css/styles.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/book/book.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/book/books.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/book/edit.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/book/new.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/person/edit.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/person/new.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/person/person.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/person/persons.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/ru/venidiktov/AppTest.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="LogFilters">
+    <option name="FILTER_ERRORS" value="false" />
+    <option name="FILTER_WARNINGS" value="false" />
+    <option name="FILTER_INFO" value="true" />
+    <option name="FILTER_DEBUG" value="true" />
+    <option name="CUSTOM_FILTER" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2HEVwCnNviHDRsJHqC6rtIxQaE1" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "last_opened_file_path": "D:/Crocodil/Programming/Java/Spring/projects/alishevCourses/eLibrary/src/main/webapp/WEB-INF/views/book",
+    "settings.editor.selected.configurable": "preferences.pluginManager"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Crocodil\Programming\Java\Spring\projects\alishevCourses\eLibrary\src\main\webapp\WEB-INF\views\book" />
+      <recent name="D:\Crocodil\Programming\Java\Spring\projects\alishevCourses\eLibrary\src\main\webapp\WEB-INF\views" />
+      <recent name="D:\Crocodil\Programming\Java\Spring\projects\alishevCourses\eLibrary\src\main\webapp\WEB-INF\views\person" />
+      <recent name="D:\Crocodil\Programming\Java\Spring\projects\alishevCourses\eLibrary\src\main\webapp\resources" />
+      <recent name="D:\Crocodil\Programming\Java\Spring\projects\alishevCourses\eLibrary\src\main\resources" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Crocodil\Programming\Java\Spring\projects\alishevCourses\eLibrary\src\main\webapp\resources\static" />
+      <recent name="D:\Crocodil\Programming\Java\Spring\projects\alishevCourses\eLibrary\src\main\resources" />
+      <recent name="D:\Crocodil\Programming\Java\Spring\projects\alishevCourses\eLibrary\src\main\webapp\WEB-INF" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="Unnamed" type="com.poratu.idea.plugins.tomcat" nameIsGenerated="true">
+      <predefined_log_file enabled="true" id="Tomcat Localhost Log" />
+      <predefined_log_file enabled="true" id="Tomcat Access Log" />
+      <predefined_log_file id="Tomcat Catalina Log" />
+      <predefined_log_file id="Tomcat Manager Log" />
+      <predefined_log_file id="Tomcat Host Manager Log" />
+      <option name="contextPath" value="" />
+      <option name="docBase" value="D:\Crocodil\Programming\Java\Spring\projects\alishevCourses\eLibrary\src\main\webapp" />
+      <option name="port" value="8077" />
+      <option name="tomcatInfo">
+        <TomcatInfo>
+          <option name="name" value="Apache Tomcat/9.0.63" />
+          <option name="path" value="$PROJECT_DIR$/../../../../../../../ProgramFiles/apache-tomcat-9.0.63" />
+          <option name="version" value="9.0.63.0" />
+        </TomcatInfo>
+      </option>
+      <option name="vmOptions" value="" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="2a18a6d4-0a5b-4846-9792-b00748584d8b" name="Changes" comment="" />
+      <created>1667850465783</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1667850465783</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/ru/venidiktov/dao/BookDao.java</url>
+          <line>32</line>
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+</project>

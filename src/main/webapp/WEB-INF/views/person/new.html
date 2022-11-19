@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Добавить читателя</title>
+</head>
+<body>
+<h3><a th:href="@{/e-library}">Домой</a></h3>
+<hr/>
+<form th:method="POST" th:action="@{new}" th:object="${person}">
+    <label for="surname">Введите Фамилию:</label>
+    <input type="text" th:field="*{surname}" id="surname"/>
+    <span style="color:red" class="validationError" th:if="${#fields.hasErrors('surname')}"
+          th:errors="*{surname}">surname Error</span>
+    <br/>
+    <label for="name">Введите Имя:</label>
+    <input type="text" th:field="*{name}" id="name"/>
+    <span style="color:red" class="validationError" th:if="${#fields.hasErrors('name')}"
+          th:errors="*{name}">name Error</span>
+    <br/>
+    <label for="middleName">Введите Отчество, если есть:</label>
+    <input type="text" th:field="*{middleName}" id="middleName"/>
+    <span style="color:red" class="validationError" th:if="${#fields.hasErrors('middleName')}"
+          th:errors="*{middleName}">middleName Error</span>
+    <br/>
+    <label for="birthday">Введите Дату рождения:</label>
+    <input type="date" th:field="*{birthday}" id="birthday"/>
+    <span style="color:red" class="validationError" th:if="${#fields.hasErrors('birthday')}"
+          th:errors="*{birthday}">birthday Error</span>
+    <br/>
+
+    <input type="submit" value="Создать человека"/>
+</form>
+</body>
+</html>
