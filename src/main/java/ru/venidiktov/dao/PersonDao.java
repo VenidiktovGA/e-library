@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 import ru.venidiktov.model.Person;
 
 import java.util.List;
+import java.util.Optional;
 
 @Component
 public class PersonDao {
@@ -66,5 +67,14 @@ public class PersonDao {
                 "delete from person where id = :id",
                 sqlParameter
         );
+    }
+
+    public Optional<Person> getByFullName(Person person) {
+        SqlParameterSource sqlParameter = new BeanPropertySqlParameterSource(person);
+        return namedParameterJdbcTemplate.query(
+                "select * from person where name = :name and surname = :surname and middle_name = :middleName",
+                sqlParameter,
+                personRowMapper
+        ).stream().findAny();
     }
 }

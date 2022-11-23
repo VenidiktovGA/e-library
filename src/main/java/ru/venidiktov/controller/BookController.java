@@ -10,6 +10,8 @@ import ru.venidiktov.model.Book;
 import ru.venidiktov.service.BookService;
 import ru.venidiktov.service.PersonService;
 
+import javax.validation.Valid;
+
 @Controller
 @RequestMapping("/books")
 @PropertySource("classpath:settings.properties")
@@ -38,7 +40,7 @@ public class BookController {
         Book book = bookService.getBookById(id);
         model.addAttribute("book", book);
         if (book.getPersonId() != null) {
-            model.addAttribute("person", bookService.getPersonForBook(book.getPersonId()));
+            model.addAttribute("owner", bookService.getBookOwner(book.getPersonId()));
         } else {
             model.addAttribute("persons", personService.getAllPerson());
         }
@@ -57,7 +59,10 @@ public class BookController {
     }
 
     @PostMapping("/new")
-    public String createBook(@ModelAttribute Book book, Errors errors) {
+    public String createBook(@ModelAttribute @Valid Book book, Errors errors) {
+        if (errors.hasErrors()) {
+            return "/book/new";
+        }
         bookService.createBook(book);
         return "redirect:/" + contextPath + "/books";
     }
@@ -71,10 +76,28 @@ public class BookController {
     @PatchMapping("/{id}")
     public String updateBook(
             @PathVariable("id") int id,
-            @ModelAttribute Book book,
+            @ModelAttribute @Valid Book book,
             Errors errors
     ) {
+        if (errors.hasErrors()) {
+            return "book/edit";
+        }
         bookService.updateBookById(id, book);
+        return "redirect:/" + contextPath + "/books/" + id;
+    }
+
+    @PatchMapping("/{id}/assign")
+    public String addPersonForBook(
+            @PathVariable("id") int id,
+            @ModelAttribute Book book
+    ) {
+        bookService.assignBook(id, book);
+        return "redirect:/" + contextPath + "/books/" + id;
+    }
+
+    @PatchMapping("/{id}/release")
+    public String releaseBook(@PathVariable("id") int id) {
+        bookService.releaseBook(id);
         return "redirect:/" + contextPath + "/books/" + id;
     }
 

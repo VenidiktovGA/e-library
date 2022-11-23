@@ -11,9 +11,11 @@ import java.util.List;
 public class BookService {
 
     private final BookDao bookDao;
+    private final PersonService personService;
 
-    public BookService(BookDao bookDao) {
+    public BookService(BookDao bookDao, PersonService personService) {
         this.bookDao = bookDao;
+        this.personService = personService;
     }
 
     public List<Book> getAllBook() {
@@ -38,10 +40,19 @@ public class BookService {
     }
 
     public List<Book> getBooksForPerson(int id) {
-        return bookDao.getBooksForPerson(id);
+        return bookDao.getBooksByPersonId(id);
     }
 
-    public Person getPersonForBook(int id) {
-        return bookDao.getPersonForBook(id);
+    public Person getBookOwner(int id) {
+        return personService.getPersonById(id);
+    }
+
+    public void assignBook(int id, Book book) {
+        book.setId(id);
+        bookDao.assign(book);
+    }
+
+    public void releaseBook(int id) {
+        bookDao.release(id);
     }
 }

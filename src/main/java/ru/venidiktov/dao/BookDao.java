@@ -62,7 +62,7 @@ public class BookDao {
         );
     }
 
-    public List<Book> getBooksForPerson(int id) {
+    public List<Book> getBooksByPersonId(int id) {
         SqlParameterSource sqlParameter = new MapSqlParameterSource("id", id);
         return namedParameterJdbcTemplate.query(
                 "select * from book where person_id = :id",
@@ -71,12 +71,19 @@ public class BookDao {
         );
     }
 
-    public Person getPersonForBook(int id) {
+    public void assign(Book book) {
+        SqlParameterSource sqlParameter = new BeanPropertySqlParameterSource(book);
+        namedParameterJdbcTemplate.update(
+                "update book set person_id = :personId where id = :id",
+                sqlParameter
+        );
+    }
+
+    public void release(int id) {
         SqlParameterSource sqlParameter = new MapSqlParameterSource("id", id);
-        return namedParameterJdbcTemplate.queryForObject(
-                "select * from person where id = :id",
-                sqlParameter,
-                personRowMapper
+        namedParameterJdbcTemplate.update(
+                "update book set person_id = NULL where id = :id",
+                sqlParameter
         );
     }
 }

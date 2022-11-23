@@ -10,7 +10,9 @@ import ru.venidiktov.model.Book;
 import ru.venidiktov.model.Person;
 import ru.venidiktov.service.BookService;
 import ru.venidiktov.service.PersonService;
+import ru.venidiktov.validator.PersonValidator;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @Controller
@@ -25,9 +27,12 @@ public class PersonController {
 
     private final BookService bookService;
 
-    public PersonController(PersonService personService, BookService bookService) {
+    private final PersonValidator personValidator;
+
+    public PersonController(PersonService personService, BookService bookService, PersonValidator personValidator) {
         this.personService = personService;
         this.bookService = bookService;
+        this.personValidator = personValidator;
     }
 
     @GetMapping()
@@ -48,17 +53,25 @@ public class PersonController {
     }
 
     @PostMapping("/new")
-    public String createPerson(@ModelAttribute Person person, Errors errors) {
+    public String createPerson(@ModelAttribute @Valid Person person, Errors errors) {
+        personValidator.validate(person, errors);
+        if (errors.hasErrors()) {
+            return "person/new";
+        }
         personService.createPerson(person);
         return "redirect:/" + contextPath + "/persons";
     }
 
     @PatchMapping("/{id}")
     public String updatePerson(
-            @ModelAttribute("person") Person person,
-            @PathVariable("id") int id,
-            Errors errors
+            @ModelAttribute("person") @Valid Person person,
+            Errors errors,
+            @PathVariable("id") int id
     ) {
+        personValidator.validate(person, errors);
+        if (errors.hasErrors()) {
+            return "person/edit";
+        }
         personService.updatePersonById(id, person);
         return "redirect:/" + contextPath + "/persons/" + id;
     }

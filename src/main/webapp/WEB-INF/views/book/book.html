@@ -17,25 +17,23 @@
         <input type="submit" value="Удалить книгу">
     </form>
 </div>
-<div>
-    <p th:if="${book.getPersonId() == null}">Книга свободна. Кому назначить ее?</p>
-    <p th:if="${book.getPersonId() != null}">Книга сейчас у [[${person.getSurname()}]] [[${person.getName()}]]
-        [[${person.getMiddleName()}]]</p>
-    <form th:method="PATCH" th:action="@{/e-library/books/{id}/(id=${book.getId()})}" th:object="${book}">
-        <input type="hidden" th:field="*{name}" id="name"/>
-        <input type="hidden" th:field="*{author}" id="author"/>
-        <input type="hidden" th:field="*{yearPublishing}" id="yearPublishing"/>
-        <span th:if="${book.getPersonId() == null}">Выберите человека:</span>
-        <select th:if="${book.getPersonId() == null}" th:field="*{personId}">
+<div th:if="${book.getPersonId() == null}">
+    <p>Книга свободна. Кому назначить ее?</p>
+    <form th:method="PATCH" th:action="@{/e-library/books/{id}/assign/(id=${book.getId()})}">
+        <label for="why">Выберите человека:</label>
+        <select id="why" th:field="*{personId}" th:object="${book}">
             <option th:each="person : ${persons}"
                     th:value="${person.getId()}"
                     th:text="${person.getSurname()} + ' ' + ${person.getName()} + ' ' + ${person.getMiddleName()}"/>
         </select>
-        <select th:if="${book.getPersonId() != null}" hidden th:field="*{personId}">
-            <option selected="selected" th:value="${null}"></option>
-        </select>
-
-        <input type="submit" th:value="${book.getPersonId() == null ? 'Назначить книгу' : 'Освободить книгу'}">
+        <input type="submit" value="Назначить книгу">
+    </form>
+</div>
+<div th:if="${book.getPersonId() != null}">
+    <p>Книга сейчас у [[${owner.getSurname()}]] [[${owner.getName()}]]
+        [[${owner.getMiddleName()}]]</p>
+    <form th:method="PATCH" th:action="@{/e-library/books/{id}/release/(id=${book.getId()})}">
+        <input type="submit" value="Освободить книгу">
     </form>
 </div>
 </body>
