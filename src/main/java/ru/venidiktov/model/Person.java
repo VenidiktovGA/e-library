@@ -2,23 +2,33 @@ package ru.venidiktov.model;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 import java.time.LocalDate;
 
+@Entity
+@Table
 public class Person {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+    @Column
     @NotEmpty(message = "Имя обязательно")
     @Size(min = 2, message = "Имя не может быть меньше 2х символов")
     private String name;
 
+    @Column
     @NotEmpty(message = "Фамилия обязательна")
     @Size(min = 2, message = "Фамилия не может быть меньше 2х символов")
     private String surname;
 
+    @Column(name = "middle_name")
     private String middleName;
+
+    @Column
     //@NotEmpty(message = "Дата рождения обязательна")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate birthday;

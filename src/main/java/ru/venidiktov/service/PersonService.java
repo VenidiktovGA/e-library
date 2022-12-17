@@ -3,6 +3,7 @@ package ru.venidiktov.service;
 import org.springframework.stereotype.Service;
 import ru.venidiktov.dao.PersonDao;
 import ru.venidiktov.model.Person;
+import ru.venidiktov.repo.PersonRepo;
 
 import java.util.List;
 
@@ -11,12 +12,15 @@ public class PersonService {
 
     private final PersonDao personDao;
 
-    public PersonService(PersonDao personDao) {
+    private final PersonRepo personRepo;
+
+    public PersonService(PersonDao personDao, PersonRepo personRepo) {
         this.personDao = personDao;
+        this.personRepo = personRepo;
     }
 
     public List<Person> getAllPerson() {
-        return personDao.getAll();
+        return personRepo.getAll();
     }
 
     public List<Person> getAllPersonWithoutBook() {
@@ -24,19 +28,19 @@ public class PersonService {
     }
 
     public void createPerson(Person person) {
-        personDao.create(person);
+        personRepo.create(person);
     }
 
     public Person getPersonById(int id) {
-        return personDao.getById(id);
+        return personRepo.getById(id);
     }
 
     public void updatePersonById(int id, Person person) {
         person.setId(id);
-        personDao.update(person);
+        personRepo.update(person);
     }
 
     public void deletePersonById(int id) {
-        personDao.deleteById(id);
+        personRepo.deleteById(id);
     }
 }

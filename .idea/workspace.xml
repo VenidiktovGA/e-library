@@ -5,26 +5,28 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2a18a6d4-0a5b-4846-9792-b00748584d8b" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/ru/venidiktov/validator/PersonValidator.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ru/venidiktov/repo/PersonRepo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ru/venidiktov/repo/PersonRepoImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/hibernate.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/venidiktov/controller/BookController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/venidiktov/controller/BookController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/venidiktov/controller/PersonController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/venidiktov/controller/PersonController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/venidiktov/dao/BookDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/venidiktov/dao/BookDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/venidiktov/dao/PersonDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/venidiktov/dao/PersonDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/venidiktov/model/Book.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/venidiktov/model/Book.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/venidiktov/config/SpringConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/venidiktov/config/SpringConfig.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ru/venidiktov/model/Person.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/venidiktov/model/Person.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/venidiktov/service/BookService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/venidiktov/service/BookService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/schema.sql" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/schema.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/book/book.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/book/book.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/venidiktov/service/PersonService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/venidiktov/service/PersonService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="CodeInsightWorkspaceSettings">
+    <option name="optimizeImportsOnTheFly" value="true" />
+  </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="Interface" />
         <option value="Class" />
       </list>
     </option>
@@ -42,6 +44,9 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="ProjectErrors" />
+  </component>
   <component name="ProjectId" id="2HEVwCnNviHDRsJHqC6rtIxQaE1" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
@@ -50,15 +55,15 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/Crocodil/Programming/Java/Spring/projects/alishevCourses/eLibrary/src/main/webapp/WEB-INF/views/book&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "last_opened_file_path": "D:/Crocodil/Programming/Java/Spring/projects/alishevCourses/eLibrary/src/main/webapp/WEB-INF/views/book",
+    "settings.editor.selected.configurable": "editor.preferences.smartKeys"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\Crocodil\Programming\Java\Spring\projects\alishevCourses\eLibrary\src\main\webapp\WEB-INF\views\book" />
@@ -71,6 +76,12 @@
       <recent name="D:\Crocodil\Programming\Java\Spring\projects\alishevCourses\eLibrary\src\main\webapp\resources\static" />
       <recent name="D:\Crocodil\Programming\Java\Spring\projects\alishevCourses\eLibrary\src\main\resources" />
       <recent name="D:\Crocodil\Programming\Java\Spring\projects\alishevCourses\eLibrary\src\main\webapp\WEB-INF" />
+    </key>
+    <key name="ExtractSuperBase.RECENT_KEYS">
+      <recent name="ru.venidiktov.repo" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="ru.venidiktov.model.hibernate" />
     </key>
   </component>
   <component name="RunManager">
@@ -112,27 +123,57 @@
       <option name="project" value="LOCAL" />
       <updated>1668887584027</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Электронная библиотека | Версия 1.0.0&#10;&#10;- Каскадирование в БД: при удалении человека удаляется его id из всех книг, книги освобождаются от него автоматически&#10;- Назначение книги формой с 1 полем: форма которая назначает книгу владельцу передает на back объект Person у которого есть только id все остальное null (лишнее)&#10;- Валидация: при создании нового читателя проверяем что с таким ФИО нет читателей в БД">
+      <created>1669233220338</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1669233220338</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="CUSTOM_BOOLEAN_PROPERTIES">
+                <map>
+                  <entry key="Show.Git.Branches" value="true" />
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Электронная библиотека | MVP&#10;&#10;Можно добавлять/редактировать/удалять кинги и читателей.&#10;Книгу можно назначить на человека или снять с него.&#10;Книга одновременно может быть только у одного человека." />
-    <option name="LAST_COMMIT_MESSAGE" value="Электронная библиотека | MVP&#10;&#10;Можно добавлять/редактировать/удалять кинги и читателей.&#10;Книгу можно назначить на человека или снять с него.&#10;Книга одновременно может быть только у одного человека." />
+    <MESSAGE value="Электронная библиотека | Версия 1.0.0&#10;&#10;- Каскадирование в БД: при удалении человека удаляется его id из всех книг, книги освобождаются от него автоматически&#10;- Назначение книги формой с 1 полем: форма которая назначает книгу владельцу передает на back объект Person у которого есть только id все остальное null (лишнее)&#10;- Валидация: при создании нового читателя проверяем что с таким ФИО нет читателей в БД" />
+    <option name="LAST_COMMIT_MESSAGE" value="Электронная библиотека | Версия 1.0.0&#10;&#10;- Каскадирование в БД: при удалении человека удаляется его id из всех книг, книги освобождаются от него автоматически&#10;- Назначение книги формой с 1 полем: форма которая назначает книгу владельцу передает на back объект Person у которого есть только id все остальное null (лишнее)&#10;- Валидация: при создании нового читателя проверяем что с таким ФИО нет читателей в БД" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
+        <line-breakpoint type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/ru/venidiktov/controller/PersonController.java</url>
           <line>57</line>
           <option name="timeStamp" value="5" />
         </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
+        <line-breakpoint type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/ru/venidiktov/controller/PersonController.java</url>
           <line>74</line>
           <option name="timeStamp" value="6" />
+        </line-breakpoint>
+        <line-breakpoint type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/ru/venidiktov/service/PersonService.java</url>
+          <line>22</line>
+          <option name="timeStamp" value="11" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
@@ -141,5 +182,9 @@
         <watch expression="((BeanPropertySqlParameterSource)sqlParameter).propertyNames" custom="org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource" />
       </configuration>
     </watches-manager>
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>

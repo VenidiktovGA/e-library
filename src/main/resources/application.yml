@@ -1,4 +1,10 @@
 server:
   port: 8077
-  #servlet:
-  #  contextPath: /e-library #contextPath настроен в классе MySpringMvcDispatcherSerlvetIntitializer#getServletMappings
+
+spring:
+  application:
+    name: e-library
+
+repo:
+  implementation: hibernate # Хотел включать реализацию repo На Hibernate в зависимости от этого значения через
+  # @ConditionalOnProperty(prefix = "repo", value = "implementation", havingValue = "hibernate") невышло
