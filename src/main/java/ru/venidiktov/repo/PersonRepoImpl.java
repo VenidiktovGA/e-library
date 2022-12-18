@@ -2,13 +2,11 @@ package ru.venidiktov.repo;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import ru.venidiktov.model.Person;
 
 import java.util.List;
 
-@Repository
 public class PersonRepoImpl implements PersonRepo {
 
     private final SessionFactory sessionFactory;
