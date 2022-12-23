@@ -2,7 +2,6 @@ package ru.venidiktov.service;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ru.venidiktov.dao.PersonDao;
 import ru.venidiktov.model.Person;
 import ru.venidiktov.repo.PersonRepoJpa;
 
@@ -11,20 +10,14 @@ import java.util.List;
 @Service
 @Transactional(readOnly = true)
 public class PersonService {
-    private final PersonDao personDao;
     private final PersonRepoJpa personRepo;
 
-    public PersonService(PersonDao personDao, PersonRepoJpa personRepo) {
-        this.personDao = personDao;
+    public PersonService(PersonRepoJpa personRepo) {
         this.personRepo = personRepo;
     }
 
     public List<Person> getAllPerson() {
         return personRepo.findAll();
-    }
-
-    public List<Person> getAllPersonWithoutBook() {
-        return personDao.getAllWithoutBook();
     }
 
     @Transactional
