@@ -20,18 +20,19 @@ public class Book {
     @Size(min = 2, message = "Название книги не может быть меньше 2х символов")
     private String name;
 
+    @ManyToOne
+    @JoinColumn(name = "person_id", referencedColumnName = "id")
+    private Person owner;
+
     @Column
     @NotEmpty(message = "ФИО автора обязательно")
     @Size(min = 3, message = "ФИО автора не может быть меньше 3х символов")
     private String author;
 
     @Column(name = "year_publishing")
-    //@NotEmpty(message = "Дата публикации обязательна")
+    //@NotEmpty(message = "Дата публикациполи обязательна")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate yearPublishing;
-
-    @Column(name = "person_id")
-    private Integer personId;
 
     public Book() {
     }
@@ -68,11 +69,11 @@ public class Book {
         this.yearPublishing = yearPublishing;
     }
 
-    public Integer getPersonId() {
-        return personId;
+    public Person getOwner() {
+        return owner;
     }
 
-    public void setPersonId(Integer personId) {
-        this.personId = personId;
+    public void setOwner(Person owner) {
+        this.owner = owner;
     }
 }

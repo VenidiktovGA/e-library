@@ -17,11 +17,11 @@
         <input type="submit" value="Удалить книгу">
     </form>
 </div>
-<div th:if="${book.getPersonId() == null}">
+<div th:if="${book.getOwner() == null}">
     <p>Книга свободна. Кому назначить ее?</p>
     <form th:method="PATCH" th:action="@{/e-library/books/{id}/assign/(id=${book.getId()})}">
         <label for="why">Выберите человека:</label>
-        <select id="why" th:field="*{personId}" th:object="${book}">
+        <select id="why" th:field="*{id}" th:object="${person}">
             <option th:each="person : ${persons}"
                     th:value="${person.getId()}"
                     th:text="${person.getSurname()} + ' ' + ${person.getName()} + ' ' + ${person.getMiddleName()}"/>
@@ -29,7 +29,7 @@
         <input type="submit" value="Назначить книгу">
     </form>
 </div>
-<div th:if="${book.getPersonId() != null}">
+<div th:if="${book.getOwner() != null}">
     <p>Книга сейчас у [[${owner.getSurname()}]] [[${owner.getName()}]]
         [[${owner.getMiddleName()}]]</p>
     <form th:method="PATCH" th:action="@{/e-library/books/{id}/release/(id=${book.getId()})}">

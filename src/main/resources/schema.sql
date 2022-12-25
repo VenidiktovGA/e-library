@@ -13,3 +13,5 @@ create table Book(
     year_publishing DATE NOT NULL,
     person_id INT REFERENCES Person(id) ON DELETE SET NULL
 );
+
+ALter table Person add column gender varchar;

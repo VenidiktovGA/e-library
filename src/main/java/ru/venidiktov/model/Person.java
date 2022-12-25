@@ -1,11 +1,13 @@
 package ru.venidiktov.model;
 
 import org.springframework.format.annotation.DateTimeFormat;
+import ru.venidiktov.enums.Gender;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Table
@@ -20,6 +22,9 @@ public class Person {
     @Size(min = 2, message = "Имя не может быть меньше 2х символов")
     private String name;
 
+    @OneToMany(mappedBy = "owner", cascade = CascadeType.PERSIST)
+    private List<Book> bookList;
+
     @Column
     @NotEmpty(message = "Фамилия обязательна")
     @Size(min = 2, message = "Фамилия не может быть меньше 2х символов")
@@ -32,6 +37,9 @@ public class Person {
     //@NotEmpty(message = "Дата рождения обязательна")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate birthday;
+
+    @Enumerated(EnumType.STRING)
+    private Gender gender;
 
     public Person() {
     }
@@ -81,5 +89,21 @@ public class Person {
 
     public void setBirthday(LocalDate birthday) {
         this.birthday = birthday;
+    }
+
+    public Gender getGender() {
+        return gender;
+    }
+
+    public void setGender(Gender gender) {
+        this.gender = gender;
+    }
+
+    public List<Book> getBookList() {
+        return bookList;
+    }
+
+    public void setBookList(List<Book> bookList) {
+        this.bookList = bookList;
     }
 }

@@ -23,6 +23,13 @@
     <span style="color:red" class="validationError" th:if="${#fields.hasErrors('middleName')}"
           th:errors="*{middleName}">middleName Error</span>
     <br/>
+    <label for="gender">Выберите пол:</label>
+    <select id="gender" th:field="*{gender}">
+        <option th:each="gen : ${T(ru.venidiktov.enums.Gender).values()}"
+                th:value="${gen}"
+                th:text="${gen.getDescription()}"/>
+    </select>
+    <br/>
     <label for="birthday">Введите Дату рождения:</label>
     <input type="date" th:field="*{birthday}" id="birthday"/>
     <span style="color:red" class="validationError" th:if="${#fields.hasErrors('birthday')}"

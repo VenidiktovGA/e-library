@@ -6,14 +6,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
-import ru.venidiktov.model.Book;
 import ru.venidiktov.model.Person;
 import ru.venidiktov.service.BookService;
 import ru.venidiktov.service.PersonService;
 import ru.venidiktov.validator.PersonValidator;
 
 import javax.validation.Valid;
-import java.util.List;
 
 @Controller
 @RequestMapping("/persons")
@@ -37,6 +35,7 @@ public class PersonController {
 
     @GetMapping()
     public String getIndexPage(Model model) {
+        personService.resolveNplusOneProblem();
         model.addAttribute("persons", personService.getAllPerson());
         return "person/persons";
     }
@@ -84,10 +83,9 @@ public class PersonController {
 
     @GetMapping("/{id}")
     public String getPersonPage(Model model, @PathVariable("id") int id) {
-        Person person = personService.getPersonById(id);
-        List<Book> booksForPerson = bookService.getBooksForPerson(id);
+        Person person = personService.getPersonByIdWithBook(id);
         model.addAttribute("person", person);
-        model.addAttribute("books", booksForPerson);
+        model.addAttribute("books", person.getBookList());
         return "person/person";
     }
 }

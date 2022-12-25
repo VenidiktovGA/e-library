@@ -1,5 +1,6 @@
 package ru.venidiktov.service;
 
+import org.hibernate.Hibernate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.venidiktov.model.Person;
@@ -16,6 +17,11 @@ public class PersonService {
         this.personRepo = personRepo;
     }
 
+    public void resolveNplusOneProblem() {
+        List<Person> persons = personRepo.resolveNplusOneProblem();
+        System.out.println("resolve N + 1 problem");
+    }
+
     public List<Person> getAllPerson() {
         return personRepo.findAll();
     }
@@ -26,7 +32,16 @@ public class PersonService {
     }
 
     public Person getPersonById(int id) {
-        return personRepo.findById(id).orElseThrow(() -> new RuntimeException("Человек c id = " + id + " не найден!"));
+        Person person = personRepo
+                .findById(id)
+                .orElseThrow(() -> new RuntimeException("Человек c id = " + id + " не найден!"));
+        return person;
+    }
+
+    public Person getPersonByIdWithBook(int id) {
+        Person person = getPersonById(id);
+        Hibernate.initialize(person.getBookList());
+        return person;
     }
 
     @Transactional

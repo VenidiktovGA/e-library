@@ -7,6 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 import ru.venidiktov.model.Book;
+import ru.venidiktov.model.Person;
 import ru.venidiktov.service.BookService;
 import ru.venidiktov.service.PersonService;
 
@@ -36,11 +37,15 @@ public class BookController {
     }
 
     @GetMapping("/{id}")
-    public String getBookPage(@PathVariable("id") int id, Model model) {
+    public String getBookPage(
+            @PathVariable("id") int id,
+            @ModelAttribute("person") Person person,
+            Model model
+    ) {
         Book book = bookService.getBookById(id);
         model.addAttribute("book", book);
-        if (book.getPersonId() != null) {
-            model.addAttribute("owner", bookService.getBookOwner(book.getPersonId()));
+        if (book.getOwner() != null) {
+            model.addAttribute("owner", bookService.getBookOwner(book.getOwner().getId()));
         } else {
             model.addAttribute("persons", personService.getAllPerson());
         }
@@ -87,12 +92,12 @@ public class BookController {
     }
 
     @PatchMapping("/{id}/assign")
-    public String addPersonForBook(
-            @PathVariable("id") int id,
-            @ModelAttribute Book book
+    public String assignBook(
+            @PathVariable("id") int bookId,
+            @ModelAttribute Person person
     ) {
-        bookService.assignBook(id, book);
-        return "redirect:/" + contextPath + "/books/" + id;
+        bookService.assignBook(bookId, person);
+        return "redirect:/" + contextPath + "/books/" + bookId;
     }
 
     @PatchMapping("/{id}/release")

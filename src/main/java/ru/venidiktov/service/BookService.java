@@ -50,7 +50,7 @@ public class BookService {
     }
 
     public List<Book> getBooksForPerson(int id) {
-        return bookRepo.findByPersonId(id);
+        return personService.getPersonById(id).getBookList();
     }
 
     public Person getBookOwner(int id) {
@@ -59,8 +59,10 @@ public class BookService {
 
 
     @Transactional
-    public void assignBook(int idBook, Book book) {
-        bookRepo.assign(book.getPersonId(), idBook);
+    public void assignBook(int bookId, Person person) {
+        Book book = bookRepo.findById(bookId).orElseThrow(() -> new RuntimeException("Книга с таким Id=" + bookId + " не найдена"));
+        Person newOwner = personService.getPersonById(person.getId());
+        book.setOwner(newOwner);
     }
 
     @Transactional
