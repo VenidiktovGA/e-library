@@ -1,6 +1,8 @@
 package ru.venidiktov.service;
 
 import org.hibernate.Hibernate;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.venidiktov.model.Person;
@@ -24,6 +26,13 @@ public class PersonService {
 
     public List<Person> getAllPerson() {
         return personRepo.findAll();
+    }
+
+    public Page<Person> getPagePerson(Integer page) {
+        if (page == null) {
+            page = 0;
+        }
+        return personRepo.findAll(PageRequest.of(page, 10));
     }
 
     @Transactional

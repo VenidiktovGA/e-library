@@ -6,7 +6,7 @@
 
     <groupId>ru.venidiktov</groupId>
     <artifactId>eLibrary</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0.5</version>
 
     <name>eLibrary</name>
     <!-- FIXME change it to the project's website -->

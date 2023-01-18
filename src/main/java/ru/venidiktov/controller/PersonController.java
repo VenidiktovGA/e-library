@@ -2,6 +2,7 @@ package ru.venidiktov.controller;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -34,9 +35,12 @@ public class PersonController {
     }
 
     @GetMapping()
-    public String getIndexPage(Model model) {
+    public String getIndexPage(@RequestParam(required = false) Integer pageNumber, Model model) {
         personService.resolveNplusOneProblem();
-        model.addAttribute("persons", personService.getAllPerson());
+        Page<Person> page = personService.getPagePerson(pageNumber);
+        model.addAttribute("persons", page.toList());
+        model.addAttribute("totalPages", page.getTotalPages());
+        model.addAttribute("page", page.getNumber());
         return "person/persons";
     }
 

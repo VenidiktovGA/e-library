@@ -14,5 +14,13 @@
     <a th:href="@{persons/{id}(id=${person.getId()})}">[[${person.getSurname()}]] [[${person.getName()}]]
         [[${person.getMiddleName()}]], [[${person.getBirthday()}]]</a>
 </div>
+<nav aria-label="Page navigation">
+    <ul class="pagination">
+        <a th:href="@{persons(pageNumber=${page - 1})}">&laquo;</a>
+        <a th:class="${i == page} ? active : ''" th:href="@{persons(pageNumber=${i})}"
+           th:each="i : ${#numbers.sequence(0, totalPages - 1, 1)}" th:text="${i + 1}"></a>
+        <a th:href="@{persons(pageNumber=${page + 1})}">&raquo;</a>
+    </ul>
+</nav>
 </body>
 </html>

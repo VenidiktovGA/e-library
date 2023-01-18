@@ -3,7 +3,8 @@ create table Person(
     surname VARCHAR NOT NULL,
     name VARCHAR NOT NULL,
     middle_name VARCHAR,
-    birthday DATE NOT NULL
+    birthday DATE NOT NULL,
+    gender VARCHAR
 );
 
 create table Book(
@@ -13,5 +14,3 @@ create table Book(
     year_publishing DATE NOT NULL,
     person_id INT REFERENCES Person(id) ON DELETE SET NULL
 );
-
-ALter table Person add column gender varchar;
