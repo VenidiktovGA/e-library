@@ -32,9 +32,12 @@ public class BookController {
     }
 
     @GetMapping
-    public String getIndexPage(@RequestParam(required = false) Integer pageNumber, Model model) {
-        Page<Book> page = bookService.getPageBook(pageNumber);
+    public String getIndexPage(@RequestParam(required = false) Integer pageNumber,
+                               @RequestParam(required = false) boolean decs,
+                               Model model) {
+        Page<Book> page = bookService.getPageBook(pageNumber, decs);
         model.addAttribute("books", page.toList());
+        model.addAttribute("decs", decs);
         model.addAttribute("totalPages", page.getTotalPages());
         model.addAttribute("page", page.getNumber());
         return "book/books";

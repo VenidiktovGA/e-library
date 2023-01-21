@@ -18,3 +18,55 @@
 }
 
 .pagination a:hover:not(.active) {background-color: #ddd;}
+
+
+.toggle-button {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+.toggle-button {
+ position: relative;
+ display: inline-block;
+ width: 100px;
+ height: 50px;
+ margin: 0;
+ vertical-align: top;
+ background: #ffffff;
+ border: 1px solid #bbc1e1;
+ border-radius: 30px;
+ outline: none;
+ cursor: pointer;
+ -webkit-appearance: none;
+ -moz-appearance: none;
+ appearance: none;
+}
+
+.toggle-button::after {
+  content: "";
+
+  display: inline-block;
+  position: absolute;
+  left: 3px;
+  top: 1.5px;
+
+  width: 45px;
+  height: 45px;
+  background-color: blue;
+  border-radius: 50%;
+
+  transform: translateX(0);
+}
+
+.toggle-button:checked::after {
+  transform: translateX(calc(100% + 3px));
+  background-color: #fff;
+}
+.toggle-button:checked {
+  background-color: blue;
+}
+
+.toggle-text {
+
+}

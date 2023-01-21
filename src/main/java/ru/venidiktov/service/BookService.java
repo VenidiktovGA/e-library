@@ -2,13 +2,16 @@ package ru.venidiktov.service;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.venidiktov.dao.BookDao;
+import ru.venidiktov.enums.SortType;
 import ru.venidiktov.model.Book;
 import ru.venidiktov.model.Person;
 import ru.venidiktov.repo.BookRepoJpa;
 
+import java.util.Arrays;
 import java.util.List;
 
 @Service
@@ -30,11 +33,12 @@ public class BookService {
         return bookRepo.findAll();
     }
 
-    public Page<Book> getPageBook(Integer pageNumber) {
+    public Page<Book> getPageBook(Integer pageNumber, boolean desc) {
         if (pageNumber == null) {
             pageNumber = 0;
         }
-        return bookRepo.findAll(PageRequest.of(pageNumber, 10));
+        SortType sortType = Arrays.stream(SortType.values()).filter(e -> e.getDesc() == desc).findAny().get();
+        return bookRepo.findAll(PageRequest.of(pageNumber, 10, Sort.by(sortType.getDirectionSort(), "yearPublishing")));
     }
 
     public Book getBookById(int id) {
