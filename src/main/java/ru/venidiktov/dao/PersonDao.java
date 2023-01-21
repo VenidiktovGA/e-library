@@ -12,6 +12,9 @@ import java.util.List;
 import java.util.Optional;
 
 @Component
+/**
+ * Не используется, используется @PersonRepoImpl
+ * */
 public class PersonDao {
 
     private final NamedParameterJdbcTemplate namedParameterJdbcTemplate;

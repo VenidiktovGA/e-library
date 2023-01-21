@@ -1,5 +1,7 @@
 package ru.venidiktov.service;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.venidiktov.dao.BookDao;
@@ -26,6 +28,13 @@ public class BookService {
 
     public List<Book> getAllBook() {
         return bookRepo.findAll();
+    }
+
+    public Page<Book> getPageBook(Integer pageNumber) {
+        if (pageNumber == null) {
+            pageNumber = 0;
+        }
+        return bookRepo.findAll(PageRequest.of(pageNumber, 10));
     }
 
     public Book getBookById(int id) {

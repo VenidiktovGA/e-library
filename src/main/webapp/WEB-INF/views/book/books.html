@@ -14,5 +14,13 @@
     <a th:href="@{books/{id}(id=${book.getId()})}">[[${book.getName()}]] - [[${book.getAuthor()}]],
         [[${book.getYearPublishing()}]]</a>
 </div>
+<nav aria-label="Page navigation">
+    <ul class="pagination">
+        <a th:href="@{books(pageNumber=${page - 1})}">&laquo;</a>
+        <a th:class="${i == page} ? active : ''" th:href="@{books(pageNumber=${i})}"
+           th:each="i : ${#numbers.sequence(0, totalPages - 1, 1)}" th:text="${i + 1}"></a>
+        <a th:href="@{books(pageNumber=${page + 1})}">&raquo;</a>
+    </ul>
+</nav>
 </body>
 </html>

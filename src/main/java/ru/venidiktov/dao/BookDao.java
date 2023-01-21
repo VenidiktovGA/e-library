@@ -10,7 +10,9 @@ import ru.venidiktov.model.Book;
 import ru.venidiktov.model.Person;
 
 import java.util.List;
-
+/**
+ * Не используется, используется @BookRepoJpa
+ */
 @Component
 public class BookDao {
 
