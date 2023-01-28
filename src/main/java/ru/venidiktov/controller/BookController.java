@@ -64,6 +64,12 @@ public class BookController {
         return "book/new";
     }
 
+    @GetMapping("/search")
+    public String getPageCreateBook(@RequestParam(required = false) String bookName, Model model) {
+        model.addAttribute("books", bookService.getBookLikeName(bookName));
+        return "book/search";
+    }
+
     @GetMapping("{id}/edit")
     public String getPageUpdateBook(@PathVariable("id") int id, Model model) {
         model.addAttribute("book", bookService.getBookById(id));

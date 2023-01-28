@@ -5,10 +5,14 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import ru.venidiktov.model.Book;
 import ru.venidiktov.model.Person;
 import ru.venidiktov.repo.PersonRepoJpa;
 
+import java.time.LocalDate;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional(readOnly = true)
@@ -51,6 +55,19 @@ public class PersonService {
         Person person = getPersonById(id);
         Hibernate.initialize(person.getBookList());
         return person;
+    }
+
+    public Map<Book, Integer> getBookWithExpiration(List<Book> books) {
+        return books.stream()
+                .collect(Collectors
+                        .toMap(
+                                e -> e,
+                                e -> {
+                                    if (e.getAssignDate() == null) return 0;
+                                    else return e.getAssignDate().plusDays(10L).compareTo(LocalDate.now());
+                                }
+                        )
+                );
     }
 
     @Transactional

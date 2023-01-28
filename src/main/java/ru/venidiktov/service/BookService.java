@@ -11,6 +11,7 @@ import ru.venidiktov.model.Book;
 import ru.venidiktov.model.Person;
 import ru.venidiktov.repo.BookRepoJpa;
 
+import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
 
@@ -31,6 +32,14 @@ public class BookService {
 
     public List<Book> getAllBook() {
         return bookRepo.findAll();
+    }
+
+    public List<Book> getBookLikeName(String name) {
+        if (name == null || name.length() < 1) {
+            return null;
+        } else {
+            return bookRepo.findBookLikeName(name.toUpperCase());
+        }
     }
 
     public Page<Book> getPageBook(Integer pageNumber, boolean desc) {
@@ -76,6 +85,7 @@ public class BookService {
         Book book = bookRepo.findById(bookId).orElseThrow(() -> new RuntimeException("Книга с таким Id=" + bookId + " не найдена"));
         Person newOwner = personService.getPersonById(person.getId());
         book.setOwner(newOwner);
+        book.setAssignDate(LocalDate.now());
     }
 
     @Transactional

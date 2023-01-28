@@ -89,7 +89,7 @@ public class PersonController {
     public String getPersonPage(Model model, @PathVariable("id") int id) {
         Person person = personService.getPersonByIdWithBook(id);
         model.addAttribute("person", person);
-        model.addAttribute("books", person.getBookList());
+        model.addAttribute("books", personService.getBookWithExpiration(person.getBookList()));
         return "person/person";
     }
 }

@@ -34,6 +34,10 @@ public class Book {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate yearPublishing;
 
+    @Column(name = "assign_date")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private LocalDate assignDate;
+
     public Book() {
     }
 
@@ -75,5 +79,13 @@ public class Book {
 
     public void setOwner(Person owner) {
         this.owner = owner;
+    }
+
+    public LocalDate getAssignDate() {
+        return assignDate;
+    }
+
+    public void setAssignDate(LocalDate assignDate) {
+        this.assignDate = assignDate;
     }
 }
