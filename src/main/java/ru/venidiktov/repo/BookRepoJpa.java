@@ -15,8 +15,6 @@ public interface BookRepoJpa extends JpaRepository<Book, Integer> {
     @Query("update Book b set b.owner = NULL where b.id = ?1")
     int release(int bookId);
 
-    List<Book> findByNameLikeIgnoreCase(String name);
-
     @Query("select b from Book b LEFT JOIN FETCH b.owner where upper(b.name) like %?1%")
     List<Book> findBookLikeName(String name);
 }

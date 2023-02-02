@@ -38,6 +38,9 @@ public class Book {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate assignDate;
 
+    @Transient
+    private boolean expired;
+
     public Book() {
     }
 
@@ -87,5 +90,14 @@ public class Book {
 
     public void setAssignDate(LocalDate assignDate) {
         this.assignDate = assignDate;
+    }
+
+    public boolean isExpired() {
+        if (assignDate == null) return false;
+        return assignDate.plusDays(10L).isBefore(LocalDate.now());
+    }
+
+    public void setExpired(boolean expired) {
+        this.expired = expired;
     }
 }

@@ -12,5 +12,6 @@ create table Book(
     name VARCHAR NOT NULL,
     author VARCHAR NOT NULL,
     year_publishing DATE NOT NULL,
-    person_id INT REFERENCES Person(id) ON DELETE SET NULL
+    person_id INT REFERENCES Person(id) ON DELETE SET NULL,
+    assign_date DATE
 );

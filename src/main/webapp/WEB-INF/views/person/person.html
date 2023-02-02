@@ -22,9 +22,9 @@
 </div>
 <div th:if="${not #lists.isEmpty(books)}">
     <h3>Книги</h3>
-    <div th:each="book :${books.keySet()}">
+    <div th:each="book :${books}">
         <p>[[${book.getName()}]] - [[${book.getAuthor()}]], [[${book.getYearPublishing()}]]
-            <span th:if="${book.getAssignDate() != null && books.get(book) < 0}">Просрочен 10 дневный период возврата!</span>
+            <span th:if="${book.isExpired()}">Просрочен 10 дневный период возврата!</span>
         </p>
     </div>
 </div>

@@ -8,7 +8,6 @@ import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 import ru.venidiktov.model.Person;
-import ru.venidiktov.service.BookService;
 import ru.venidiktov.service.PersonService;
 import ru.venidiktov.validator.PersonValidator;
 
@@ -24,13 +23,10 @@ public class PersonController {
 
     private final PersonService personService;
 
-    private final BookService bookService;
-
     private final PersonValidator personValidator;
 
-    public PersonController(PersonService personService, BookService bookService, PersonValidator personValidator) {
+    public PersonController(PersonService personService, PersonValidator personValidator) {
         this.personService = personService;
-        this.bookService = bookService;
         this.personValidator = personValidator;
     }
 
@@ -89,7 +85,7 @@ public class PersonController {
     public String getPersonPage(Model model, @PathVariable("id") int id) {
         Person person = personService.getPersonByIdWithBook(id);
         model.addAttribute("person", person);
-        model.addAttribute("books", personService.getBookWithExpiration(person.getBookList()));
+        model.addAttribute("books", person.getBookList());
         return "person/person";
     }
 }

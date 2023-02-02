@@ -5,7 +5,6 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ru.venidiktov.dao.BookDao;
 import ru.venidiktov.enums.SortType;
 import ru.venidiktov.model.Book;
 import ru.venidiktov.model.Person;
@@ -19,19 +18,12 @@ import java.util.List;
 @Transactional(readOnly = true)
 public class BookService {
 
-    private final BookDao bookDao;
-
     private final BookRepoJpa bookRepo;
     private final PersonService personService;
 
-    public BookService(BookDao bookDao, BookRepoJpa bookRepo, PersonService personService) {
-        this.bookDao = bookDao;
+    public BookService(BookRepoJpa bookRepo, PersonService personService) {
         this.bookRepo = bookRepo;
         this.personService = personService;
-    }
-
-    public List<Book> getAllBook() {
-        return bookRepo.findAll();
     }
 
     public List<Book> getBookLikeName(String name) {
@@ -61,18 +53,16 @@ public class BookService {
     }
 
     @Transactional
-    public void updateBookById(int id, Book book) {
-        book.setId(id);
-        bookRepo.save(book);
+    public void updateBookById(int id, Book updatedBook) {
+        Book bookToBeUpdated = bookRepo.findById(id).orElseThrow(() -> new RuntimeException("Книги с таким id=" + id + " не существует!"));
+        updatedBook.setId(id);
+        updatedBook.setOwner(bookToBeUpdated.getOwner());
+        bookRepo.save(updatedBook);
     }
 
     @Transactional
     public void deleteBookById(int id) {
         bookRepo.deleteById(id);
-    }
-
-    public List<Book> getBooksForPerson(int id) {
-        return personService.getPersonById(id).getBookList();
     }
 
     public Person getBookOwner(int id) {
