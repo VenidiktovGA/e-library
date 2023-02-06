@@ -1,7 +1,6 @@
 package ru.venidiktov.controller;
 
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.PropertySource;
+import jakarta.validation.Valid;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,15 +10,9 @@ import ru.venidiktov.model.Person;
 import ru.venidiktov.service.PersonService;
 import ru.venidiktov.validator.PersonValidator;
 
-import javax.validation.Valid;
-
 @Controller
 @RequestMapping("/persons")
-@PropertySource("classpath:settings.properties")
 public class PersonController {
-
-    @Value("${contextPath}")
-    private String contextPath;
 
     private final PersonService personService;
 
@@ -58,7 +51,7 @@ public class PersonController {
             return "person/new";
         }
         personService.createPerson(person);
-        return "redirect:/" + contextPath + "/persons";
+        return "redirect:/persons";
     }
 
     @PatchMapping("/{id}")
@@ -72,13 +65,13 @@ public class PersonController {
             return "person/edit";
         }
         personService.updatePersonById(id, person);
-        return "redirect:/" + contextPath + "/persons/" + id;
+        return "redirect:/persons/" + id;
     }
 
     @DeleteMapping("/{id}")
     public String deletePerson(@PathVariable("id") int id) {
         personService.deletePersonById(id);
-        return "redirect:/" + contextPath + "/persons";
+        return "redirect:/persons";
     }
 
     @GetMapping("/{id}")

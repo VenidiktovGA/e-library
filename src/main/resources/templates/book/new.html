@@ -1,31 +1,30 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org"
->
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Изменить данные о книге</title>
+    <title>Добавить читателя</title>
 </head>
 <body>
-<h3><a th:href="@{/e-library}">Домой</a></h3>
+<h3><a th:href="@{/}">Домой</a></h3>
 <hr/>
-<form th:method="PATCH" th:action="@{/e-library/books/{id}(id=${book.getId()})}" th:object="${book}">
-    <label for="name">Изменить название книги:</label>
+<form th:method="POST" th:action="@{new}" th:object="${book}">
+    <label for="name">Введите название книги:</label>
     <input type="text" th:field="*{name}" id="name"/>
     <span style="color:red" class="validationError" th:if="${#fields.hasErrors('name')}"
           th:errors="*{name}">name Error</span>
     <br/>
-    <label for="author">Изменить ФИО автора:</label>
+    <label for="author">Введите ФИО автора:</label>
     <input type="text" th:field="*{author}" id="author"/>
     <span style="color:red" class="validationError" th:if="${#fields.hasErrors('author')}"
           th:errors="*{author}">author Error</span>
     <br/>
-    <label for="yearPublishing">Изменить год издания:</label>
+    <label for="yearPublishing">Введите год издания:</label>
     <input type="date" th:field="*{yearPublishing}" id="yearPublishing"/>
     <span style="color:red" class="validationError" th:if="${#fields.hasErrors('yearPublishing')}"
           th:errors="*{yearPublishing}">yearPublishing Error</span>
     <br/>
 
-    <input type="submit" value="Обновить данные о книге"/>
+    <input type="submit" value="Создать книгу"/>
 </form>
 </body>
 </html>

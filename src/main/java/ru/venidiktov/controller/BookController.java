@@ -1,7 +1,6 @@
 package ru.venidiktov.controller;
 
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.PropertySource;
+import jakarta.validation.Valid;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,15 +11,9 @@ import ru.venidiktov.model.Person;
 import ru.venidiktov.service.BookService;
 import ru.venidiktov.service.PersonService;
 
-import javax.validation.Valid;
-
 @Controller
 @RequestMapping("/books")
-@PropertySource("classpath:settings.properties")
 public class BookController {
-
-    @Value("${contextPath}")
-    private String contextPath;
 
     private final BookService bookService;
 
@@ -82,13 +75,13 @@ public class BookController {
             return "/book/new";
         }
         bookService.createBook(book);
-        return "redirect:/" + contextPath + "/books";
+        return "redirect:/books";
     }
 
     @DeleteMapping("/{id}")
     public String deleteBook(@PathVariable("id") int id) {
         bookService.deleteBookById(id);
-        return "redirect:/" + contextPath + "/books";
+        return "redirect:/books";
     }
 
     @PatchMapping("/{id}")
@@ -101,7 +94,7 @@ public class BookController {
             return "book/edit";
         }
         bookService.updateBookById(id, book);
-        return "redirect:/" + contextPath + "/books/" + id;
+        return "redirect:/books/" + id;
     }
 
     @PatchMapping("/{id}/assign")
@@ -110,13 +103,13 @@ public class BookController {
             @ModelAttribute Person person
     ) {
         bookService.assignBook(bookId, person);
-        return "redirect:/" + contextPath + "/books/" + bookId;
+        return "redirect:/books/" + bookId;
     }
 
     @PatchMapping("/{id}/release")
     public String releaseBook(@PathVariable("id") int id) {
         bookService.releaseBook(id);
-        return "redirect:/" + contextPath + "/books/" + id;
+        return "redirect:/books/" + id;
     }
 
 }

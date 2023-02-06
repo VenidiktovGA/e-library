@@ -3,17 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <title>Книги</title>
-    <link rel="stylesheet" th:href="@{styles.css}"/>
-    <script type="text/javascript" th:src="@{books.js}" defer></script>
+    <link rel="stylesheet" th:href="@{/css/styles.css}"/>
+    <script type="text/javascript" th:src="@{/js/books.js}" defer></script>
 </head>
 <body>
 <a th:href="@{books/search}">Найти книгу</a>
 <hr/>
 <a th:href="@{books/new}">Добавить книгу</a>
 <hr/>
-<h3><a th:href="@{/e-library}">Домой</a></h3>
+<h3><a th:href="@{/}">Домой</a></h3>
 <hr/>
-<form th:method="GET" th:action="@{books}">
+<form th:method="GET" th:action="@{/books}">
     <input name="decs" type="checkbox" id="toggle-button" class="toggle-button" th:checked="${decs}">
     <label for="toggle-button" class="toggle-text">Сортировать год [[${decs} ? 'по возрастанию' : 'по
         убыванию']]</label>

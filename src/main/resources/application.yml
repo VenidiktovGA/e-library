@@ -1,10 +1,18 @@
 server:
   port: 8077
+  servlet:
+    context-path: /e-library
 
 spring:
-  application:
-    name: e-library
+  jpa:
+    show-sql: true
+  mvc:
+    hiddenmethod:
+      filter:
+        enabled: true
+  datasource:
+    url: jdbc:postgresql://localhost:5477/postgres
+    username: postgres
+    password: qwerty
+    driverClassName: org.postgresql.Driver
 
-repo:
-  implementation: hibernate # Хотел включать реализацию repo На Hibernate в зависимости от этого значения через
-  # @ConditionalOnProperty(prefix = "repo", value = "implementation", havingValue = "hibernate") невышло

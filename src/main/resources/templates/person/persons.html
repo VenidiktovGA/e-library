@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <title>Человек</title>
-    <link rel="stylesheet" th:href="@{styles.css}"/>
+    <link rel="stylesheet" th:href="@{/css/styles.css}"/>
 </head>
 <body>
 <a th:href="@{persons/new}">Добавить человека</a>
 <hr/>
-<h3><a th:href="@{/e-library}">Домой</a></h3>
+<h3><a th:href="@{/}">Домой</a></h3>
 <hr/>
 <div th:each="person : ${persons}">
     <a th:href="@{persons/{id}(id=${person.getId()})}">[[${person.getSurname()}]] [[${person.getName()}]]

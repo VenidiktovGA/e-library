@@ -5,9 +5,9 @@
     <title>Поиск книги</title>
 </head>
 <body>
-<h3><a th:href="@{/e-library}">Домой</a></h3>
+<h3><a th:href="@{/}">Домой</a></h3>
 <hr/>
-<form th:method="GET" th:action="@{search}">
+<form th:method="GET" th:action="@{/search}">
     <input type="text" name="bookName" id="search-book">
     <label for="search-book" class="toggle-text">Введите название книги</label>
     <input type="submit" value="Найди книгу"/>
