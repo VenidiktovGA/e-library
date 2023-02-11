@@ -10,6 +10,8 @@
 <hr/>
 <h3><a th:href="@{/}">Домой</a></h3>
 <hr/>
+<h3><span>В данной сессии вы зашли на страницу в [[${countIn}]] раз, id вашей сессии = [[${sessionId}]]</span></h3>
+<hr/>
 <div th:each="person : ${persons}">
     <a th:href="@{persons/{id}(id=${person.getId()})}">[[${person.getSurname()}]] [[${person.getName()}]]
         [[${person.getMiddleName()}]], [[${person.getBirthday()}]]</a>

@@ -1,5 +1,6 @@
 package ru.venidiktov.controller;
 
+import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
@@ -9,6 +10,8 @@ import org.springframework.web.bind.annotation.*;
 import ru.venidiktov.model.Person;
 import ru.venidiktov.service.PersonService;
 import ru.venidiktov.validator.PersonValidator;
+
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/persons")
@@ -24,7 +27,17 @@ public class PersonController {
     }
 
     @GetMapping()
-    public String getIndexPage(@RequestParam(required = false) Integer pageNumber, Model model) {
+    public String getIndexPage(
+            @RequestParam(required = false) Integer pageNumber,
+            Model model,
+            HttpSession session
+    ) {
+        Integer countIn = Optional.ofNullable((Integer) session.getAttribute("countIn")).orElse(0) + 1;
+        String sessionId = session.getId();
+        session.setAttribute("countIn", countIn);
+        model.addAttribute("countIn", countIn);
+        model.addAttribute("sessionId", sessionId);
+
         personService.resolveNplusOneProblem();
         Page<Person> page = personService.getPagePerson(pageNumber);
         model.addAttribute("persons", page.toList());

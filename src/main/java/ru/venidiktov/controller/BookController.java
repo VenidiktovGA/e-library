@@ -19,6 +19,8 @@ public class BookController {
 
     private final PersonService personService;
 
+    private static final String REDIRECT_BOOKS = "redirect:/books/";
+
     public BookController(BookService bookService, PersonService personService) {
         this.bookService = bookService;
         this.personService = personService;
@@ -94,7 +96,7 @@ public class BookController {
             return "book/edit";
         }
         bookService.updateBookById(id, book);
-        return "redirect:/books/" + id;
+        return REDIRECT_BOOKS + id;
     }
 
     @PatchMapping("/{id}/assign")
@@ -103,13 +105,13 @@ public class BookController {
             @ModelAttribute Person person
     ) {
         bookService.assignBook(bookId, person);
-        return "redirect:/books/" + bookId;
+        return REDIRECT_BOOKS + bookId;
     }
 
     @PatchMapping("/{id}/release")
     public String releaseBook(@PathVariable("id") int id) {
         bookService.releaseBook(id);
-        return "redirect:/books/" + id;
+        return REDIRECT_BOOKS + id;
     }
 
 }
