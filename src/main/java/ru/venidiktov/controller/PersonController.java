@@ -1,5 +1,7 @@
 package ru.venidiktov.controller;
 
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import org.springframework.data.domain.Page;
@@ -30,13 +32,21 @@ public class PersonController {
     public String getIndexPage(
             @RequestParam(required = false) Integer pageNumber,
             Model model,
-            HttpSession session
+            HttpSession session,
+            HttpServletResponse response,
+            @CookieValue(value = "eLibraryStatus", required = false) String eLibraryStatus
     ) {
         Integer countIn = Optional.ofNullable((Integer) session.getAttribute("countIn")).orElse(0) + 1;
         String sessionId = session.getId();
         session.setAttribute("countIn", countIn);
         model.addAttribute("countIn", countIn);
         model.addAttribute("sessionId", sessionId);
+
+        Cookie cookie = new Cookie("eLibraryStatus", eLibraryStatus == null ? "firstPersonsPageVisited" : "notFirstPersonsPageVisited");
+        cookie.setHttpOnly(true);
+        cookie.setMaxAge(24 * 60 * 60);
+        response.addCookie(cookie);
+
 
         personService.resolveNplusOneProblem();
         Page<Person> page = personService.getPagePerson(pageNumber);
