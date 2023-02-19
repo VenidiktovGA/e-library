@@ -5,11 +5,15 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import org.springframework.data.domain.Page;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 import ru.venidiktov.model.Person;
+import ru.venidiktov.model.Users;
+import ru.venidiktov.security.UsersDetails;
 import ru.venidiktov.service.PersonService;
 import ru.venidiktov.validator.PersonValidator;
 
@@ -36,10 +40,11 @@ public class PersonController {
             HttpServletResponse response,
             @CookieValue(value = "eLibraryStatus", required = false) String eLibraryStatus
     ) {
-        Integer countIn = Optional.ofNullable((Integer) session.getAttribute("countIn")).orElse(0) + 1;
+        String attribute = "countIn";
+        Integer countIn = Optional.ofNullable((Integer) session.getAttribute(attribute)).orElse(0) + 1;
         String sessionId = session.getId();
-        session.setAttribute("countIn", countIn);
-        model.addAttribute("countIn", countIn);
+        session.setAttribute(attribute, countIn);
+        model.addAttribute(attribute, countIn);
         model.addAttribute("sessionId", sessionId);
 
         Cookie cookie = new Cookie("eLibraryStatus", eLibraryStatus == null ? "firstPersonsPageVisited" : "notFirstPersonsPageVisited");
@@ -54,6 +59,15 @@ public class PersonController {
         model.addAttribute("totalPages", page.getTotalPages());
         model.addAttribute("page", page.getNumber());
         return "person/persons";
+    }
+
+    @GetMapping("/user-info")
+    public String showUserInfo() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        UsersDetails userDetails = (UsersDetails) authentication.getPrincipal();
+        Users user = userDetails.getUser();
+        System.out.println(user);
+        return "index";
     }
 
     @GetMapping("/new")
