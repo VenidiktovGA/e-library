@@ -6,6 +6,7 @@ import jakarta.validation.constraints.Size;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
+import java.util.Objects;
 
 @Entity
 @Table
@@ -99,5 +100,30 @@ public class Book {
 
     public void setExpired(boolean expired) {
         this.expired = expired;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Book book)) return false;
+
+        if (expired != book.expired) return false;
+        if (!Objects.equals(name, book.name)) return false;
+        if (!Objects.equals(owner, book.owner)) return false;
+        if (!Objects.equals(author, book.author)) return false;
+        if (!Objects.equals(yearPublishing, book.yearPublishing))
+            return false;
+        return Objects.equals(assignDate, book.assignDate);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = name != null ? name.hashCode() : 0;
+        result = 31 * result + (owner != null ? owner.hashCode() : 0);
+        result = 31 * result + (author != null ? author.hashCode() : 0);
+        result = 31 * result + (yearPublishing != null ? yearPublishing.hashCode() : 0);
+        result = 31 * result + (assignDate != null ? assignDate.hashCode() : 0);
+        result = 31 * result + (expired ? 1 : 0);
+        return result;
     }
 }
