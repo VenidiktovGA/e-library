@@ -1,0 +1,30 @@
+server:
+  port: 8077
+  servlet:
+    context-path: /e-library
+
+spring:
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: create
+  #  show-sql: true
+  #  generate-ddl: true
+  mvc:
+    hiddenmethod:
+      filter:
+        enabled: true
+  datasource:
+    url: jdbc:h2:mem:myDb
+    username: h2
+    password: h2
+    driverClassName: org.h2.Driver
+    #continueOnError: true
+    #initialization-mode: always
+  h2:
+    console:
+      enabled: true
+  sql:
+    init:
+      mode: always # применять файлы .sql
+

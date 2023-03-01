@@ -1,14 +1,13 @@
 package ru.venidiktov.service;
 
 import org.assertj.core.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import ru.venidiktov.model.Book;
+import ru.venidiktov.paramresolver.BookServiceParamResolver;
 import ru.venidiktov.repo.BookRepoJpa;
 
 import java.util.Collections;
@@ -21,7 +20,11 @@ import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.*;
 
-@ExtendWith(MockitoExtension.class)
+@ExtendWith({
+        MockitoExtension.class,
+        BookServiceParamResolver.class
+})
+@DisplayName("Test book service")
 class BookServiceTest {
     @Mock
     private BookRepoJpa bookRepoJpa;
@@ -29,6 +32,15 @@ class BookServiceTest {
     private PersonService personService;
     @InjectMocks
     private BookService bookService;
+
+    BookServiceTest(TestInfo testInfo) {
+        System.out.println();
+    }
+
+    @BeforeAll
+    static void myResolverExample(Book book) {
+        System.out.println(book);
+    }
 
     @BeforeEach
     void dependenciesShouldBeNotNull() {

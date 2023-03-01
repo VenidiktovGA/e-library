@@ -3,6 +3,7 @@ package ru.venidiktov;
 
 import org.junit.platform.engine.discovery.DiscoverySelectors;
 import org.junit.platform.launcher.LauncherDiscoveryRequest;
+import org.junit.platform.launcher.TagFilter;
 import org.junit.platform.launcher.core.LauncherDiscoveryRequestBuilder;
 import org.junit.platform.launcher.core.LauncherFactory;
 import org.junit.platform.launcher.listeners.SummaryGeneratingListener;
@@ -14,13 +15,12 @@ public class TestLauncher {
     public static void main(String[] args) {
         var launcher = LauncherFactory.create();
         var summaryGeneratingListener = new SummaryGeneratingListener();
-//        launcher.registerLauncherDiscoveryListeners();
         launcher.registerTestExecutionListeners(summaryGeneratingListener);
 
         LauncherDiscoveryRequest request = LauncherDiscoveryRequestBuilder
                 .request()
                 .selectors(DiscoverySelectors.selectPackage("ru.venidiktov.service"))
-//                .listeners()
+                .filters(TagFilter.excludeTags("notFoundBook"))
                 .build();
         launcher.execute(request);
 
