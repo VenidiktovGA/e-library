@@ -1,48 +1,52 @@
 package ru.venidiktov.repo;
 
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.testcontainers.containers.GenericContainer;
+import org.testcontainers.junit.jupiter.Container;
+import org.testcontainers.junit.jupiter.Testcontainers;
 
-import java.sql.*;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 
-@ExtendWith(MockitoExtension.class)
-@SpringBootTest
-/*@EnableJpaRepositories(basePackages = {
-        "ru.venidiktov.repo.BookRepoJpa"
-})*/
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+
+@Testcontainers
 public class BookRepoTest {
 
-    /*@Autowired
-    private BookRepoJpa bookRepo;*/
-
-    public static Connection getConnection() {
-        Connection connection = null;
-        try {
-            connection = DriverManager.getConnection("jdbc:h2:mem:testDB", "sa", "");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return connection;
-    }
+    @Container
+    public static GenericContainer simpleWebServer
+            = new GenericContainer("alpine:3.2")
+            .withExposedPorts(80)
+            .withCommand("/bin/sh", "-c", "while true; do echo "
+                    + "\"HTTP/1.1 200 OK\n\nHello World!\" | nc -l -p 80; done");
 
     @Test
-    void test() throws SQLException {
-        ResultSet resultSet = null;
-        try(Statement statement = getConnection().createStatement()) {
-//            String createUsers = "drop table users";
-//            statement.execute(createUsers);
-            String sql = "select * from Person";
-            resultSet = statement.executeQuery(sql);
-            System.out.println("Fine, users = " + resultSet.getInt("id"));
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        } finally {
-            if(resultSet != null) resultSet.close();
-            System.out.println("Fine!");
-        }
+    public void givenSimpleWebServerContainer_whenGetReuqest_thenReturnsResponse()
+            throws Exception {
+        String address = "http://"
+                + simpleWebServer.getContainerIpAddress()
+                + ":" + simpleWebServer.getMappedPort(80);
+        String response = simpleGetRequest(address);
+
+        assertEquals(response, "Hello World!");
     }
 
+    private String simpleGetRequest(String address) throws Exception {
+        URL url = new URL(address);
+        HttpURLConnection con = (HttpURLConnection) url.openConnection();
+        con.setRequestMethod("GET");
 
+        BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
+        String inputLine;
+        StringBuffer content = new StringBuffer();
+        while ((inputLine = in.readLine()) != null) {
+            content.append(inputLine);
+        }
+        in.close();
+
+        return content.toString();
+    }
 }
