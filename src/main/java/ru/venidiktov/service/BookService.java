@@ -30,7 +30,7 @@ public class BookService {
         if (name == null || name.length() < 1) {
             return null;
         } else {
-            return bookRepo.findBookLikeName(name.toUpperCase());
+            return bookRepo.findByNameContainingIgnoreCase(name);
         }
     }
 
