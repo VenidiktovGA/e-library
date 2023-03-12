@@ -4,6 +4,7 @@ import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.CsvFileSource;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.ValueSource;
 import org.springframework.data.domain.Page;
@@ -60,16 +61,17 @@ class BookServiceTest extends BaseTest {
         verify(bookRepo).findByNameContainingIgnoreCase(name);
     }
 
-    @Test
+    @ParameterizedTest
     @Tag("foundBook")
-    void getBookById_ReturnFindingBook_IfBookExist() {
-        Book actualBook = bookService.getBookById(1);
+    @CsvFileSource(resources = "/book-data-test.csv", delimiter = ',', numLinesToSkip = 1)
+    void getBookById_ReturnFindingBook_IfBookExist(Integer id, String bookName, String author, String year_publishing) {
+        Book actualBook = bookService.getBookById(id);
 
         assertAll(
                 () -> assertThat(actualBook).isNotNull(),
-                () -> assertThat(actualBook.getName()).isNotNull(),
-                () -> assertThat(actualBook.getAuthor()).isNotNull(),
-                () -> assertThat(actualBook.getYearPublishing()).isNotNull()
+                () -> assertThat(actualBook.getName()).isEqualToIgnoringCase(bookName),
+                () -> assertThat(actualBook.getAuthor()).isEqualToIgnoringCase(author),
+                () -> assertThat(actualBook.getYearPublishing()).isEqualTo(year_publishing)
         );
         verify(bookRepo).findById(1);
     }

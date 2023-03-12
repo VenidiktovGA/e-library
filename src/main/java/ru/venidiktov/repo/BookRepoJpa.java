@@ -15,5 +15,7 @@ public interface BookRepoJpa extends JpaRepository<Book, Integer> {
     @Query("update Book b set b.owner = NULL where b.id = ?1")
     int release(int bookId);
 
+    // TODO: 3/12/2023 Тут возникает проблема 1000+1 для каждой книги будет делаться селект в таблицу Person
+    //чтобы этого избежать нужно использовать ... нужно решить проблему с регистром @Query("select b from Book b LEFT JOIN FETCH b.owner where upper(b.name) like %?1%")
     List<Book> findByNameContainingIgnoreCase(String name);
 }
