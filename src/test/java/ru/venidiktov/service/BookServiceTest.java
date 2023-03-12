@@ -12,13 +12,14 @@ import ru.venidiktov.BaseTest;
 import ru.venidiktov.model.Book;
 import ru.venidiktov.paramresolver.BookServiceParamResolver;
 
+import java.time.Duration;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
-import static org.junit.jupiter.api.Assertions.assertAll;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.verify;
+import static org.mockito.internal.verification.VerificationModeFactory.times;
 
 @ExtendWith(BookServiceParamResolver.class)
 @DisplayName("Test book service")
@@ -93,5 +94,17 @@ class BookServiceTest extends BaseTest {
                 Arguments.of(null, true),
                 Arguments.of(0, true)
         );
+    }
+
+    @Nested
+    @DisplayName("SLA time response")
+    class SLATimeResponse {
+
+        @RepeatedTest(value = 5, name = RepeatedTest.LONG_DISPLAY_NAME)
+        @Tag("SLA")
+        void getBookLikeName_NotFound_IfBookNotExist(RepetitionInfo repetitionInfo) {
+            assertTimeout(Duration.ofSeconds(1L), () -> bookService.getBookLikeName("олец"));
+            verify(bookRepo, times(repetitionInfo.getCurrentRepetition())).findByNameContainingIgnoreCase("олец");
+        }
     }
 }
