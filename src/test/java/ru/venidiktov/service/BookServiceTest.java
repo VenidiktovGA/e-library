@@ -9,6 +9,10 @@ import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.ValueSource;
 import org.springframework.data.domain.Page;
 import ru.venidiktov.BaseTest;
+import ru.venidiktov.extension.ConditionalExtension;
+import ru.venidiktov.extension.GlobalExtension;
+import ru.venidiktov.extension.PostProcessingExtension;
+import ru.venidiktov.extension.ThrowableExtension;
 import ru.venidiktov.model.Book;
 import ru.venidiktov.paramresolver.BookServiceParamResolver;
 
@@ -21,7 +25,13 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.verify;
 import static org.mockito.internal.verification.VerificationModeFactory.times;
 
-@ExtendWith(BookServiceParamResolver.class)
+@ExtendWith({
+        BookServiceParamResolver.class,
+        GlobalExtension.class,
+        PostProcessingExtension.class,
+        ConditionalExtension.class,
+        ThrowableExtension.class
+})
 @DisplayName("Test book service")
 class BookServiceTest extends BaseTest {
 
@@ -55,7 +65,8 @@ class BookServiceTest extends BaseTest {
     @ParameterizedTest
     @Tag("notFoundBook")
     @ValueSource(strings = {"Как стать Тиранозавром", "Готовим на луне", "1234$@"})
-    void getBookLikeName_NotFound_IfBookNotExist(String name) {
+    void getBookLikeName_NotFound_IfBookNotExist(String name) throws RuntimeException {
+        if (true) throw new RuntimeException();
         var expectedBook = bookService.getBookLikeName(name);
 
         assertThat(expectedBook).isEmpty();
