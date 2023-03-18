@@ -11,5 +11,7 @@
     <div><input type="submit" value="Sign In"/></div>
     <div th:if="${param.error}" style="color: red">Неправильное имя или пароль</div>
 </form>
+
+<h3><a th:href="@{/auth/registration}">Регистрация</a></h3>
 </body>
 </html>
