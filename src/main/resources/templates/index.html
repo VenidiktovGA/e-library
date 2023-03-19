@@ -9,7 +9,9 @@
 <div>
     <h3><a th:href="@{/books}">Книги</a></h3>
     <h3><a th:href="@{/persons}">Читатели</a></h3>
-    <h3><a th:href="@{/logout}">Выйти</a></h3>
+    <form th:action="@{/logout}" th:method="POST">
+        <input type="submit" value="Выйти">
+    </form>
 </div>
 <div>
 
