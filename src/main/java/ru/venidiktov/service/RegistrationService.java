@@ -3,6 +3,7 @@ package ru.venidiktov.service;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import ru.venidiktov.enums.Role;
 import ru.venidiktov.model.Users;
 import ru.venidiktov.repo.UsersRepo;
 
@@ -21,6 +22,7 @@ public class RegistrationService {
     @Transactional
     public void registration(Users user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
+        user.setRole(Role.ROLE_USER);
         usersRepo.save(user);
     }
 

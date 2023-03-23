@@ -1,6 +1,7 @@
 TRUNCATE TABLE Book, Person, Users RESTART IDENTITY;
 
-insert into Users (username, year_of_birth, password) values('user', 1980, 'pass');
+insert into Users (username, year_of_birth, role, password) values('user', 1980, 'ROLE_USER', '$2a$10$4JamR8nEkpeXlY0wkyIQo.5E25DspL/sOyp6i6YU6Fgoy5dm5cSjO');
+insert into Users (username, year_of_birth, role, password) values('admin', 1960, 'ROLE_ADMIN', '$2a$10$99mpk9YObo3KzxB8WK5IceM1.N0PHfBMgtXYG/Nnl4Ghhuba5UVzm');
 
 insert into Person (surname, name, middle_name, birthday, gender)
 values ('Ivanov', 'Ivan', 'Ivanovitch', '1960-01-01', 'MALE');

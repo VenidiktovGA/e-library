@@ -1,6 +1,7 @@
 package ru.venidiktov.security;
 
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import ru.venidiktov.model.Users;
 
@@ -18,8 +19,9 @@ public class UsersDetails implements UserDetails, Serializable {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return Collections.emptyList();
+        return Collections.singletonList(new SimpleGrantedAuthority(user.getRole().name()));
     }
+
 
     @Override
     public String getPassword() {

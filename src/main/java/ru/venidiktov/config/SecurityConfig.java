@@ -7,6 +7,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import ru.venidiktov.enums.Role;
 
 @Configuration
 @EnableWebSecurity
@@ -17,8 +18,10 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests(requests -> requests
-                        .requestMatchers("/auth/login", "/auth/registration", "/error").permitAll()
-                        .anyRequest().authenticated()
+                                .requestMatchers("/admin").hasAuthority(Role.ROLE_ADMIN.name())
+                                .requestMatchers("/auth/login", "/auth/registration", "/error").permitAll()
+                                .anyRequest().hasAnyAuthority(Role.ROLE_USER.name(), Role.ROLE_ADMIN.name())
+//                        .anyRequest().authenticated() То же самое что и выше
                 )
                 .formLogin().loginPage("/auth/login")
                 .loginProcessingUrl("/process_login")
