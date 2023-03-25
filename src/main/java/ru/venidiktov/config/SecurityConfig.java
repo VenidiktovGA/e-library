@@ -2,6 +2,7 @@ package ru.venidiktov.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -11,6 +12,7 @@ import ru.venidiktov.enums.Role;
 
 @Configuration
 @EnableWebSecurity
+@EnableMethodSecurity
 public class SecurityConfig {
 
     @Bean
@@ -18,7 +20,7 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests(requests -> requests
-                                .requestMatchers("/admin").hasAuthority(Role.ROLE_ADMIN.name())
+//                                .requestMatchers("/admin").hasAuthority(Role.ROLE_ADMIN.name())
                                 .requestMatchers("/auth/login", "/auth/registration", "/error").permitAll()
                                 .anyRequest().hasAnyAuthority(Role.ROLE_USER.name(), Role.ROLE_ADMIN.name())
 //                        .anyRequest().authenticated() То же самое что и выше
