@@ -1,36 +1,46 @@
 package ru.venidiktov.service;
 
-import org.junit.jupiter.api.*;
+import java.time.Duration;
+import java.time.LocalDate;
+import java.util.stream.Stream;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
+import static org.junit.jupiter.api.Assertions.assertAll;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTimeout;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Nested;
+import org.junit.jupiter.api.RepeatedTest;
+import org.junit.jupiter.api.RepetitionInfo;
+import org.junit.jupiter.api.Tag;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInfo;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.CsvFileSource;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.ValueSource;
+import org.mockito.ArgumentCaptor;
+import static org.mockito.Mockito.verify;
+import static org.mockito.internal.verification.VerificationModeFactory.times;
 import org.springframework.data.domain.Page;
 import ru.venidiktov.BaseTest;
 import ru.venidiktov.extension.ConditionalExtension;
 import ru.venidiktov.extension.GlobalExtension;
 import ru.venidiktov.extension.PostProcessingExtension;
-import ru.venidiktov.extension.ThrowableExtension;
 import ru.venidiktov.model.Book;
+import ru.venidiktov.model.Person;
 import ru.venidiktov.paramresolver.BookServiceParamResolver;
-
-import java.time.Duration;
-import java.util.stream.Stream;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.verify;
-import static org.mockito.internal.verification.VerificationModeFactory.times;
 
 @ExtendWith({
         BookServiceParamResolver.class,
         GlobalExtension.class,
         PostProcessingExtension.class,
         ConditionalExtension.class,
-        ThrowableExtension.class
+//        ThrowableExtension.class
 })
 @DisplayName("Test book service")
 class BookServiceTest extends BaseTest {
@@ -66,7 +76,8 @@ class BookServiceTest extends BaseTest {
     @Tag("notFoundBook")
     @ValueSource(strings = {"Как стать Тиранозавром", "Готовим на луне", "1234$@"})
     void getBookLikeName_NotFound_IfBookNotExist(String name) throws RuntimeException {
-        if (true) throw new RuntimeException();
+        if (true)
+            throw new RuntimeException(); //Смотрел как работает самописный перехват исключение в тесте ThrowableExtension
         var expectedBook = bookService.getBookLikeName(name);
 
         assertThat(expectedBook).isEmpty();
@@ -97,6 +108,32 @@ class BookServiceTest extends BaseTest {
         assertAll(
                 () -> assertThat(actualPage).isNotEmpty(),
                 () -> assertThat(actualPage.getTotalPages()).isEqualTo(1)
+        );
+    }
+
+    @Test
+    void assignBook_success() {
+        Person person = new Person();
+        person.setName("Ivan");
+        person.setSurname("Ivanov");
+        person.setBirthday(LocalDate.now());
+        personRepo.saveAndFlush(person);
+        Book book = new Book();
+        book.setName("Java 21");
+        book.setAuthor("Pupkin");
+        book.setYearPublishing(LocalDate.now());
+        bookRepo.saveAndFlush(book);
+
+        bookService.assignBook(book.getId(), person);
+        Book existBook = bookRepo.getById(book.getId());
+        System.out.println("dsdf" + 10 + 10);
+
+        var argumentCaptor = ArgumentCaptor.forClass(Integer.class);
+        verify(personService, times(1)).getPersonById(argumentCaptor.capture());
+        assertAll(
+                () -> assertThat(existBook).isNotNull(),
+                () -> assertThat(existBook.getOwner()).isNotNull(),
+                () -> assertThat(argumentCaptor.getValue()).isEqualTo(person.getId())
         );
     }
 

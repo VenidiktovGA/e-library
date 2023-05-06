@@ -1,17 +1,15 @@
 package ru.venidiktov.repo;
 
+import java.util.List;
+import static org.assertj.core.api.Assertions.assertThat;
 import org.junit.jupiter.api.Test;
 import ru.venidiktov.BaseTest;
 import ru.venidiktov.model.Book;
 
-import java.util.List;
-
-import static org.assertj.core.api.Assertions.assertThat;
-
 public class BookRepoTest extends BaseTest {
 
     @Test
-    public void isExistsBook() {
+    public void findByNameContainingIgnoreCase_success_ifBookExist() {
         List<Book> books = bookRepo.findByNameContainingIgnoreCase("колец");
         Book lordOfTheRings = books.get(0);
 
