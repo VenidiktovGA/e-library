@@ -1,20 +1,20 @@
 package ru.venidiktov.controller;
 
-import java.util.List;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import ru.venidiktov.model.Book;
-import ru.venidiktov.repo.BookRepoJpa;
+import ru.venidiktov.service.BookService;
 
 @RestController
 @RequestMapping("/info")
 public class InfoRestController {
 
-    private BookRepoJpa bookRepository;
+    private final BookService bookService;
 
-    public InfoRestController(BookRepoJpa bookRepository) {
-        this.bookRepository = bookRepository;
+    public InfoRestController(BookService bookService) {
+        this.bookService = bookService;
     }
 
     @GetMapping
@@ -22,8 +22,9 @@ public class InfoRestController {
         return "Info";
     }
 
-    @GetMapping("/books")
-    public List<Book> getAllBooks() {
-        return bookRepository.findAll();
+    @GetMapping("/book/{id}")
+    public Book getBookById(@PathVariable("id") int id) {
+        return bookService.getBookById(id);
     }
+
 }

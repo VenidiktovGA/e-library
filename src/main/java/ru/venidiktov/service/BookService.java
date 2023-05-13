@@ -1,18 +1,18 @@
 package ru.venidiktov.service;
 
+import java.time.LocalDate;
+import java.util.Arrays;
+import java.util.List;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.venidiktov.enums.SortType;
+import ru.venidiktov.exception.BookNotFoundException;
 import ru.venidiktov.model.Book;
 import ru.venidiktov.model.Person;
 import ru.venidiktov.repo.BookRepoJpa;
-
-import java.time.LocalDate;
-import java.util.Arrays;
-import java.util.List;
 
 @Service
 @Transactional(readOnly = true)
@@ -44,7 +44,7 @@ public class BookService {
 
     public Book getBookById(int id) {
         return bookRepo.findById(id)
-                .orElseThrow(() -> new RuntimeException("Книги с таким id=" + id + " не существует!"));
+                .orElseThrow(() -> new BookNotFoundException("Книги с таким id=" + id + " не существует!"));
     }
 
     @Transactional
