@@ -16,3 +16,5 @@ spring:
     password: qwerty
     driverClassName: org.postgresql.Driver
 
+jwt:
+  secret: Gennadiy good
